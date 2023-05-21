@@ -1,6 +1,7 @@
 package com.example.collection;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +9,10 @@ import java.util.List;
 @Service
 public class EmployeeService {
     private static final int MAX_SIZE = 10;
-    private List<Employee> employees = new ArrayList<>(MAX_SIZE);
+    private final List<Employee> employees = new ArrayList<>(MAX_SIZE);
 
 
-    private Employee add(String firstName, String lastName) {
+    public Employee add(String firstName, String lastName) {
         if (employees.size() >= MAX_SIZE) {
             throw new EmployeeStorageIsFullException();
         }
@@ -19,28 +20,40 @@ public class EmployeeService {
         if (employees.contains(employee)) {
             throw new EmployeeAlreadyAddedException();
         }
-        employees.add(employee);
+         employees.add(employee);
         return employee;
     }
 
-    private void delete(String firstName, String lastName) {
-        Employee employee = new Employee(firstName,lastName);
-        for (Employee empl:employees){
-            if (empl.equals(employee)){
-                employees.remove(empl);
-                                return ;
+    public Employee delete(String firstName, String lastName) throws EmployeeNotFoundException {
+        Employee employee = new Employee(firstName, lastName);
+        for (Employee empl : employees) {
+            if (empl.equals(employee)) {
+                employees.remove(employee);
+                return employee;
             }
         }
+
+        throw new EmployeeNotFoundException();
+
     }
 
-    private Employee find(String firstName, String lastName) {
-        Employee employee = new Employee(firstName,lastName);
-        for (Employee empl:employees){
-            if (empl.equals(employee)){
+
+    public Employee find(String firstName, String lastName) {
+        Employee employee = new Employee(firstName, lastName);
+        for (Employee empl : employees) {
+            if (empl.equals(employee)) {
                 return empl;
             }
         }
         throw new EmployeeNotFoundException();
     }
 
+    public String print() {
+        String a = "";
+        for (Employee empl : employees) {
+            a = a + empl.toString();
+        }
+        return a;
+    }
 }
+    
