@@ -18,30 +18,38 @@ public class DepartmentService {
         this.employeeService = employeeService;
     }
 
-    public Employee max(String department) {
+    public Employee max(int department) {
         return employeeService.getEmployees()
                 .stream()
-                .filter(employee -> employee.getDepartment().equals(department))
+                .filter(employee -> employee.getDepartment()==(department))
                 .max(Comparator.comparing(Employee::getSalary))
                 .orElse(null);
     }
 
-    public Employee min(String department) {
+    public Employee min(int department) {
         return employeeService.getEmployees()
                 .stream()
-                .filter(employee -> employee.getDepartment().equals(department))
+                .filter(employee -> employee.getDepartment()==(department))
                 .min(Comparator.comparing(Employee::getSalary))
                 .orElse(null);
     }
+    public int sum(int department) {
+        Collection<Employee> EmplOfDept = allOfDept(department);
+        int sum=0;
+        for (Employee empl: EmplOfDept ){
+            sum += empl.getSalary();
+        }
+        return sum;
+    }
 
-    public Collection<Employee> allOfDept(String department) {
+    public Collection<Employee> allOfDept(int department) {
         return employeeService.getEmployees()
                 .stream()
-                .filter(employee -> employee.getDepartment().equals(department))
+                .filter(employee -> employee.getDepartment()==(department))
                 .collect(Collectors.toList());
     }
 
-    public Map<String, List<Employee>> all() {
+    public Map<Integer, List<Employee>> all() {
         return employeeService.getEmployees()
                 .stream()
                 .collect(groupingBy(Employee::getDepartment));

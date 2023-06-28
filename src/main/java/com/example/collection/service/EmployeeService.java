@@ -16,7 +16,7 @@ public class EmployeeService {
     }
 
 
-    public Employee add(String firstName, String lastName, String department, int salary) {
+    public Employee add(String firstName, String lastName, int department, int salary) {
 
         Employee employee = new Employee(firstName, lastName, department, salary);
         if (employees.containsKey(employee.getName())) {
@@ -26,7 +26,7 @@ public class EmployeeService {
         return employee;
     }
 
-    public Employee delete(String firstName, String lastName, String department, int salary) throws EmployeeNotFoundException {
+    public Employee delete(String firstName, String lastName, int department, int salary) throws EmployeeNotFoundException {
         Employee employee = new Employee(firstName, lastName, department, salary);
         if (employees.containsKey(employee.getName())) {
             employees.remove(employee.getName());
@@ -35,7 +35,7 @@ public class EmployeeService {
 
         throw new EmployeeNotFoundException();
     }
-    public Employee find(String firstName, String lastName, String department, int salary) {
+    public Employee find(String firstName, String lastName, int department, int salary) {
         Employee employee = new Employee(firstName, lastName, department, salary );
         if (employees.containsKey(employee.getName())) {
             return employee;

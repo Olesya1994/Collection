@@ -2,11 +2,7 @@ package com.example.collection.controller;
 
 import com.example.collection.Employee;
 import com.example.collection.service.DepartmentService;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -19,21 +15,24 @@ public class DepartmentController {
     public DepartmentController(DepartmentService service) {
         this.service = service;
     }
-
-    @GetMapping("/max-salary")
-    public Employee max (@RequestParam String department){
-        return service.max(department);
+    @GetMapping("/{id}/salary/max")
+    public Employee max (@PathVariable int id){
+        return service.max(id);
     }
-    @GetMapping("/min-salary")
-    public Employee min (@RequestParam String department){
-        return service.max(department);
+    @GetMapping("/{id}/salary/min")
+    public Employee min (@PathVariable int id){
+        return service.min(id);
     }
-    @GetMapping("/all")
-    public Collection<Employee> allOfDept (@RequestParam String department){
-        return service.allOfDept(department);
+    @GetMapping("/{id}/salary/sum")
+    public int sum (@PathVariable int id){
+        return service.sum(id);
     }
-    @GetMapping("/all")
-    public Map<String, List<Employee>>  all (){
+    @GetMapping("{id}/all")
+    public Collection<Employee> allOfDept (@PathVariable int id){
+        return service.allOfDept(id);
+    }
+    @GetMapping("/employees")
+    public Map<Integer, List<Employee>>  all (){
         return service.all();
     }
 }

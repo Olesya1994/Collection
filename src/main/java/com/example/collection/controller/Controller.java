@@ -23,17 +23,17 @@ public class Controller {
     }
 
     @GetMapping("/add")
-    public Employee add(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String department, @RequestParam int salary) {
+    public Employee add(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int department, @RequestParam int salary) {
         return service.add(firstName, lastName,department,salary);
     }
 
     @GetMapping("/remove")
-    public Employee delete(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String department, @RequestParam int salary) {
+    public Employee delete(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int department, @RequestParam int salary) {
         return service.delete(firstName, lastName,department,salary);
     }
 
     @GetMapping("/find")
-    public Employee find(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String department, @RequestParam int salary) {
+    public Employee find(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int department, @RequestParam int salary) {
         return service.find(firstName, lastName,department,salary);
     }
 
